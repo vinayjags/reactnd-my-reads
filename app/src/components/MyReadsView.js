@@ -40,7 +40,7 @@ export default class MyReadsView extends Component {
                 <div className="shelf-container">
                     {
                         shelfs.map((shelf) => {
-                            return (<BookShelf title={shelf.label} />)
+                            return (<BookShelf key={shelf.id} title={shelf.label} />)
                         })
                     }
                 </div>

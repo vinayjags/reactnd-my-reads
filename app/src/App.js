@@ -5,6 +5,13 @@ import './App.css';
 import { Route } from "react-router-dom";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      shelfBooks: []
+    }
+  }
+
   render() {
     return (
       <div className="App">
