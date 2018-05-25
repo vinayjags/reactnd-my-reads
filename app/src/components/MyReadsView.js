@@ -1,51 +1,57 @@
 import React, { Component } from "react";
 import BookShelf from "./shared/BookShelf";
+import { Link } from "react-router-dom";
 
 export default class MyReadsView extends Component {
-    constructor() {
-        super();
-        this.state = {
-            myBooks: []
-        }
-    }
 
     filterBooksForShelf(shelf) {
-        return this.state.myBooks.filter((book) => {
-            return book.type = shelf;
+        return this.props.shelfBooks.filter((book) => {
+            return book.shelf === shelf;
         });
     }
 
-    render() {
+    updateBookShelf(book, newShelf) {
+        this.props.onBookUpdate(book, newShelf)
+    }
 
+    render() {
         const shelfs = [
             {
                 id: "currentlyReading",
-                label: "Currently Reading"
+                label: "Currently Reading",
             },
             {
                 id: "wantToRead",
-                label: "Want to Read"
+                label: "Want to Read",
             },
             {
                 id: "read",
-                label: "Read"
+                label: "Read",
             }
         ]
 
         return (
             <div>
-                <div className="hdr">
+                <div className="book-shelf-hdr">
                     MyReads
                 </div>
                 <div className="shelf-container">
                     {
                         shelfs.map((shelf) => {
-                            return (<BookShelf key={shelf.id} title={shelf.label} />)
+                            return (
+                                <BookShelf
+                                    key={shelf.id}
+                                    title={shelf.label}
+                                    books={this.filterBooksForShelf(shelf.id)}
+                                    onBookAddUpdate={(book, shelf) => this.updateBookShelf(book, shelf)}
+                                />
+                            )
                         })
                     }
                 </div>
-                <div className="search-book">
-                </div>
+                <Link to="/search" className="search-book">
+                    <i className="fa fa-plus"></i>
+                </Link>
             </div>
         )
     }

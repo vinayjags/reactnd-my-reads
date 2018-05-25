@@ -14,6 +14,23 @@ export default class SearchBookView extends Component {
         this.queryPromise = null;
     }
 
+    updateBookShelf(book, newShelf) {
+        this.props.onBookAddUpdate(book, newShelf)
+    }
+
+    getBookShelf(book) {
+        let currentShelf = '';
+        let [bookFiltered] = this.props.shelfBooks.filter(bookItem => {
+            return bookItem.id === book.id
+        })
+
+        if (bookFiltered) {
+            currentShelf = bookFiltered.shelf;
+        }
+
+        return currentShelf;
+    }
+
     searchBooks() {
         if (this.state.query !== "") {
             this.queryPromise = search(this.state.query);
@@ -61,20 +78,30 @@ export default class SearchBookView extends Component {
 
         if (this.state.searchedBooks.length > 0) {
             bookView = this.state.searchedBooks.map((book) => {
-                return <BookItemView key={book.id} book={book} />
+                return (
+                    <BookItemView
+                        onBookAddUpdate={(book, shelf) => this.updateBookShelf(book, shelf)}
+                        key={book.id}
+                        book={book}
+                        currentShelf={this.getBookShelf(book)}
+                    />
+                )
             })
         }
 
         return (
             <div>
-                <div className="hdr">
-                    <div className="search-book-hdr-wrapper">
-                        <Link to="/" className="back-arrow">
-                            <i className="fa fa-lg fa-arrow-left"></i>
-                        </Link>
-                        <div className="search-books-input-wrapper">
-                            <input onChange={(e) => this.changeQyery(e)} placeholder="Search by title or author" type="text" value={this.state.query} className="search-input" />
-                        </div>
+                <div className="search-book-hdr-wrapper">
+                    <Link to="/" className="back-arrow">
+                        <i className="fa fa-lg fa-arrow-left"></i>
+                    </Link>
+                    <div className="search-books-input-wrapper">
+                        <input
+                            onChange={(e) => this.changeQyery(e)}
+                            placeholder="Search by title or author"
+                            type="text"
+                            value={this.state.query}
+                            className="search-input" />
                     </div>
                 </div>
                 <div className="book-list-wrapper">
