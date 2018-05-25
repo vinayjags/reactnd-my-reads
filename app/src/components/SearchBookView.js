@@ -7,9 +7,9 @@ export default class SearchBookView extends Component {
     constructor() {
         super();
         this.state = {
-            query: '',
+            query: "",
             searchedBooks: [],
-            searchText: ''
+            searchText: ""
         }
         this.queryPromise = null;
     }
@@ -19,7 +19,7 @@ export default class SearchBookView extends Component {
     }
 
     getBookShelf(book) {
-        let currentShelf = '';
+        let currentShelf = "";
         let [bookFiltered] = this.props.shelfBooks.filter(bookItem => {
             return bookItem.id === book.id
         })
@@ -36,9 +36,9 @@ export default class SearchBookView extends Component {
             this.queryPromise = search(this.state.query);
             this.queryPromise.then((response) => {
                 this.queryPromise = null;
-                let message = '';
-                if (typeof response.error !== 'undefined') {
-                    message = 'No Books found for your search. Please try something else.'
+                let message = "";
+                if (typeof response.error !== "undefined") {
+                    message = "No Books found for your search. Please try something else."
                 }
                 this.setState((previousState) => {
                     return {
@@ -51,7 +51,7 @@ export default class SearchBookView extends Component {
             this.setState((previousState) => {
                 return {
                     searchedBooks: [],
-                    searchText: ''
+                    searchText: ""
                 }
             });
         }
@@ -62,7 +62,7 @@ export default class SearchBookView extends Component {
         this.setState((previousState) => {
             return {
                 query: value,
-                searchText: 'Searching for Books. Please wait...',
+                searchText: "Searching for Books. Please wait...",
                 searchedBooks: []
             }
         }, (event) => {

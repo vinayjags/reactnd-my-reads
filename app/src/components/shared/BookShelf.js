@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import BookItemView from "./BookItemView";
 
 export default class BookShelf extends Component {
@@ -7,7 +7,7 @@ export default class BookShelf extends Component {
     }
 
     getBookShelf(book) {
-        let currentShelf = '';
+        let currentShelf = "";
         let [bookFiltered] = this.props.books.filter(bookItem => {
             return bookItem.id === book.id
         })

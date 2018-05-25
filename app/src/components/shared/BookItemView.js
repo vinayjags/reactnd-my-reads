@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 export default class BookItemView extends Component {
     render() {
@@ -9,7 +9,7 @@ export default class BookItemView extends Component {
         }
 
         let thumbnail = {};
-        if (typeof this.props.book.imageLinks !== 'undefined') {
+        if (typeof this.props.book.imageLinks !== "undefined") {
             thumbnail = {
                 backgroundImage: `url(${this.props.book.imageLinks.thumbnail})`
             }
@@ -40,7 +40,7 @@ export default class BookItemView extends Component {
                 </div>
                 <div className="book-author">
                     {
-                        (typeof this.props.book.authors !== 'undefined') && (this.props.book.authors.map((author) => {
+                        (typeof this.props.book.authors !== "undefined") && (this.props.book.authors.map((author) => {
                             return (<div className="author-name" key={author}>{author}</div>)
                         }))
                     }
