@@ -19,7 +19,7 @@ export default class SearchBookView extends Component {
     }
 
     getBookShelf(book) {
-        let currentShelf = "";
+        let currentShelf = "none";
         let [bookFiltered] = this.props.shelfBooks.filter(bookItem => {
             return bookItem.id === book.id
         })
